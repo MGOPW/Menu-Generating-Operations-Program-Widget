@@ -27,16 +27,16 @@ const JSONGenerator = ({ menu, trees }) => {
     }
 
     let outputJSON = trees.map((tree) => {
-        return menu[tree.id];
+        return JSON.stringify(menu[tree.id]);
     });
 
     if (outputJSON.length > 1) {
-        outputJSON = [outputJSON.join(',')];
+        outputJSON = outputJSON.join(',');
     }
 
     return (
         <pre>
-            <code>{JSON.stringify(outputJSON)}</code>
+            <code>[{outputJSON}]</code>
         </pre>
     );
 };

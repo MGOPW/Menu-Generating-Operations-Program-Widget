@@ -1,9 +1,9 @@
-import MenuItem from './MenuItem';
-import MenuEditor from './MenuEditor';
-import JSONGenerator from './JSONGenerator';
-import { TreeNode, getRoot } from '../helpers/tree';
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { getRoot, TreeNode } from '../helpers/tree';
+import JSONGenerator from './JSONGenerator';
+import MenuEditor from './MenuEditor';
+import MenuItem from './MenuItem';
 
 const MenuBuilder = () => {
     const [menu, setMenu] = useState({});
@@ -27,7 +27,6 @@ const MenuBuilder = () => {
             const newState = [...JSON.parse(JSON.stringify(menuTree))];
 
             const path = getRoot(parent, newState);
-            console.log(path);
 
             let node = newState;
             for (const key of path) {
@@ -43,19 +42,16 @@ const MenuBuilder = () => {
     return (
         <div>
             <MenuEditor updateTree={updateTree} id={uuidv4()} />
-            <pre>{JSON.stringify(menuTree)}</pre>
-            <ul>
-                {ids.map((node) => {
-                    return (
-                        <MenuItem
-                            key={node}
-                            parent={node}
-                            updateMenu={updateMenu}
-                            updateTree={updateTree}
-                        />
-                    );
-                })}
-            </ul>
+            {ids.map((node) => {
+                return (
+                    <MenuItem
+                        key={node}
+                        parent={node}
+                        updateMenu={updateMenu}
+                        updateTree={updateTree}
+                    />
+                );
+            })}
             <JSONGenerator menu={menu} trees={menuTree} />
         </div>
     );

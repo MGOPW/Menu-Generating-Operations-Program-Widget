@@ -1,6 +1,6 @@
-import MenuEditor from './MenuEditor';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import MenuEditor from './MenuEditor';
 
 const MenuItem = ({ parent, updateMenu, updateTree }) => {
     const [labelInput, setLabelInput] = useState();
