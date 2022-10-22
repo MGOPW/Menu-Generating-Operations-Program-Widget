@@ -41,7 +41,7 @@ const MenuItem = ({ parent, updateMenu, updateTree }) => {
     }, [labelInput, typeInput, pageInput, sysIdInput, hrefInput]);
 
     return (
-        <div>
+        <li>
             <label>
                 Label:
                 <input
@@ -95,7 +95,7 @@ const MenuItem = ({ parent, updateMenu, updateTree }) => {
                 </label>
             )}
             <MenuEditor parent={parent} id={uuidv4()} updateTree={updateTree} />
-        </div>
+        </li>
     );
 };
 

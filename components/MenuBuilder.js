@@ -3,12 +3,11 @@ import { v4 as uuidv4 } from 'uuid';
 import { getRoot, TreeNode } from '../helpers/tree';
 import JSONGenerator from './JSONGenerator';
 import MenuEditor from './MenuEditor';
-import MenuItem from './MenuItem';
+import MenuUI from './MenuUI';
 
 const MenuBuilder = () => {
     const [menu, setMenu] = useState({});
     const [menuTree, setMenuTree] = useState([]);
-    const [ids, setIds] = useState([]);
 
     const updateMenu = (id, input) => {
         let newMenu = { ...menu };
@@ -18,8 +17,6 @@ const MenuBuilder = () => {
     };
 
     const updateTree = (choice, id, parent) => {
-        setIds([...ids, id]);
-
         if (!parent) {
             const newTree = new TreeNode(id, [], null, choice);
             setMenuTree([...menuTree, newTree]);
@@ -40,20 +37,17 @@ const MenuBuilder = () => {
     };
 
     return (
-        <div>
+        <>
             <MenuEditor updateTree={updateTree} id={uuidv4()} />
-            {ids.map((node) => {
-                return (
-                    <MenuItem
-                        key={node}
-                        parent={node}
-                        updateMenu={updateMenu}
-                        updateTree={updateTree}
-                    />
-                );
-            })}
+            <nav>
+                <MenuUI
+                    menuTree={menuTree}
+                    updateMenu={updateMenu}
+                    updateTree={updateTree}
+                />
+            </nav>
             <JSONGenerator menu={menu} trees={menuTree} />
-        </div>
+        </>
     );
 };
 
