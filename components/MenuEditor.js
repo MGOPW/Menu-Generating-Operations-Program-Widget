@@ -1,29 +1,36 @@
-import { useState } from 'react';
+import styled from "styled-components";
+import "../src/stylesheets/styles.scss";
 
 const MenuEditor = ({ parent, showDelete, updateTree, id }) => {
-    const [choice, setChoice] = useState('action');
+  const handleAdd = (choice) => {
+    updateTree(choice, id, parent);
+  };
 
-    const changeChoice = ({ target: { value } }) => {
-        setChoice(value);
-    };
+  const choseAction = () => {
+    handleAdd("action");
+  };
+  const choseMenu = () => {
+    handleAdd("menu");
+  };
 
-    const handleAdd = () => {
-        updateTree(choice, id, parent);
-    };
-
-    return (
-        <>
-            <label>
-                Build Menu:
-                <select value={choice} onChange={changeChoice}>
-                    <option value="action">Action</option>
-                    <option value="menu">Menu</option>
-                </select>
-            </label>
-            <button onClick={handleAdd}>Add Child</button>
-            {showDelete && <button>Delete</button>}
-        </>
-    );
+  return (
+    <Wrapper className="treeview__level-btns">
+      <div className="btn btn-default btn-sm level-sub" onClick={choseAction}>
+        <span>Add Child Action</span>
+      </div>
+      <div className="btn btn-default btn-sm level-same" onClick={choseMenu}>
+        <span>Add Child Menu</span>
+      </div>
+      <div className="btn btn-default btn-sm level-remove">
+        <span className="fa fa-trash text-danger"></span>
+      </div>
+      {showDelete && <button>Delete</button>}
+    </Wrapper>
+  );
 };
+
+const Wrapper = styled.div`
+  //color: red;
+`;
 
 export default MenuEditor;
