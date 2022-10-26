@@ -39,3 +39,18 @@ const traverse = (node, parent, path, i) => {
 
     return false;
 };
+
+export const deleteNode = (id, menu, menuTree) => {
+    const path = getRoot(id, menuTree);
+
+    let node = menuTree;
+    for (const key of path) {
+        node = node[key];
+    }
+
+    for (let i = 0; i < node.children.length; i++) {
+        deleteNode(node.children[i].id, menu, menuTree);
+    }
+
+    delete menu[id];
+};
