@@ -66,7 +66,7 @@ const JSONGenerator = ({ menu, trees }) => {
         <Snackbar
           anchorOrigin={{
             horizontal: "right",
-            vertical: "bottom"
+            vertical: "bottom",
           }}
           open={open}
           autoHideDuration={5000}

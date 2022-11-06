@@ -5,31 +5,41 @@ import MenuEditor from "./MenuEditor";
 import "../src/stylesheets/styles.scss";
 import styled from "styled-components";
 
-const MenuItem = ({ parent, choice, updateMenu, updateTree }) => {
-  const [labelInput, setLabelInput] = useState();
-  const [typeInput, setTypeInput] = useState("");
-  const [pageInput, setPageInput] = useState();
-  const [sysIdInput, setSysIdInput] = useState();
-  const [hrefInput, setHrefInput] = useState();
+const MenuItem = ({
+  parent,
+  choice,
+  updateMenu,
+  updateTree,
+  label,
+  type,
+  page,
+  sys_id,
+  href,
+}) => {
+  const [labelInput, setLabelInput] = useState(label);
+  const [typeInput, setTypeInput] = useState(type);
+  const [pageInput, setPageInput] = useState(page);
+  const [sysIdInput, setSysIdInput] = useState(sys_id);
+  const [hrefInput, setHrefInput] = useState(href);
 
   const routeJSON = {
     route: pageInput,
     fields: {
-      sysId: sysIdInput
-    }
+      sysId: sysIdInput,
+    },
   };
 
   const externalJSON = {
-    href: hrefInput
+    href: hrefInput,
   };
 
   const actionJSON = {
     value: {
       label: {
         translatable: true,
-        message: labelInput
-      }
-    }
+        message: labelInput,
+      },
+    },
   };
 
   if (typeInput !== "") {
@@ -49,12 +59,14 @@ const MenuItem = ({ parent, choice, updateMenu, updateTree }) => {
           <span className="level-title">Label:</span>
           <input
             type="text"
+            defaultValue={labelInput}
             onChange={({ target: { value } }) => setLabelInput(value)}
           />
           <label>
             Type:
             <select
               name="type"
+              defaultValue={typeInput}
               onChange={({ target: { value } }) => setTypeInput(value)}
             >
               <option value="">-- None -- </option>
@@ -68,6 +80,7 @@ const MenuItem = ({ parent, choice, updateMenu, updateTree }) => {
                 Page:
                 <input
                   type="text"
+                  defaultValue={pageInput}
                   onChange={({ target: { value } }) => setPageInput(value)}
                 />
               </label>
@@ -75,6 +88,7 @@ const MenuItem = ({ parent, choice, updateMenu, updateTree }) => {
                 sys_id:
                 <input
                   type="text"
+                  defaultValue={sysIdInput}
                   onChange={({ target: { value } }) => setSysIdInput(value)}
                 />
               </label>
@@ -86,6 +100,7 @@ const MenuItem = ({ parent, choice, updateMenu, updateTree }) => {
               <input
                 type="url"
                 pattern="https://.*"
+                defaultValue={hrefInput}
                 onChange={({ target: { value } }) => setHrefInput(value)}
               />
             </label>
